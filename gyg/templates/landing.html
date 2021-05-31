@@ -1,0 +1,111 @@
+{% extends 'base.html' %} {% load static %}
+<!-- landing css -->
+{% block css %} {% endblock %}
+
+<!-- landing content -->
+{% block main %}
+<!--  -->
+<div class="main-intro">
+  <div class="text">
+    <div class="title">Online Learnig Platform</div>
+    <div class="sub-title">Learn and develop new skills</div>
+    <div class="nbtn">
+      <a href="/accounts/signup/"> Sign Up </a>
+    </div>
+  </div>
+  <div class="img">
+    <img src="{% static 'img/und.png'%}" alt="Image" width="100%" />
+  </div>
+</div>
+<!-- features -->
+<div class="main-features">
+  <div class="feature">
+    <div class="fImg">
+      <img src="{% static 'img/3.jpeg'%}" alt="" />
+    </div>
+    <div class="fText">
+      <div class="fTitle">Learn anytime, anywhere</div>
+      <div class="fDesc">
+        One subscription gets you access to all our live and recorded classes to
+        watch from the comfort of any of your devices
+      </div>
+    </div>
+  </div>
+  <div class="feature">
+    <div class="fImg">
+      <img src="{% static 'img/2.jpeg'%}" alt="" />
+    </div>
+    <div class="fText">
+      <div class="fTitle">Learn anytime, anywhere</div>
+      <div class="fDesc">
+        One subscription gets you access to all our live and recorded classes to
+        watch from the comfort of any of your devices
+      </div>
+    </div>
+  </div>
+  <div class="feature">
+    <div class="fImg">
+      <img src="{% static 'img/1.jpeg'%}" alt="" />
+    </div>
+    <div class="fText">
+      <div class="fTitle">Learn anytime, anywhere</div>
+      <div class="fDesc">
+        One subscription gets you access to all our live and recorded classes to
+        watch from the comfort of any of your devices
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->
+
+<!-- main courses -->
+<div id="mainCourses_id" class="main-courses">
+  {% for category in categories %}
+  <div class="course-cat-title">{{category}}</div>
+
+  <div class="course-cat-cards">
+    {% for i in category.courses.all %}
+    <a href="{% url 'gyg:courseDesc' i.id %}">
+      <div class="customCard">
+        <div class="customCard-image">
+          <img src="{{i.course_thumbnail.url}}" alt="" />
+        </div>
+        <div class="customCard-title">{{i.title}}</div>
+        <div class="card-tutorName">By Saif Ahmed</div>
+        <div class="card-priceDetail">
+          <div class="price">₹{{i.price}}</div>
+          <div class="priceTag">Paid</div>
+        </div>
+        <div class="card-ratings">
+          <div class="rating">★★★★★</div>
+          <div class="people-rated">(10)</div>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% endfor %}
+</div>
+<!--  -->
+
+<!-- instructor -->
+<div class="bInstructor">
+  <div class="iImg">
+    <img src="{%static 'img/teach.png'%}" alt="" />
+  </div>
+  <div class="iText">
+    <div class="iTitle">Become a Instructor</div>
+    <div class="iDesc">
+      Teaching is a skill if you wanna teach what you love then join with us as
+      instructor.
+    </div>
+    <div class="ibtn">
+      <a href="#">Join as instructor</a>
+    </div>
+  </div>
+</div>
+<!--  -->
+{% endblock %}
+
+<!-- landing js -->
+{% block js %} {% endblock %}

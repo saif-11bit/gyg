@@ -1,0 +1,57 @@
+.main-login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.logForm input {
+  background: white;
+  border: none;
+  outline: none;
+  flex: 1;
+  width: 400px;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  font-size: 1.1rem;
+}
+
+.logForm input[type="submit"] {
+  background: #1b3288;
+  color: white;
+  cursor: pointer;
+}
+
+.google-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
+  padding: 10px;
+}
+.google-login .text {
+  color: rgb(31, 31, 31);
+  margin-right: 6px;
+  margin-bottom: 6px;
+}
+.or {
+  margin-bottom: 20px;
+  color: rgb(116, 116, 116);
+}
+.anotherPageLk a {
+  text-decoration: none;
+  padding: 5px;
+  color: #b125b1;
+}
+
+@media (max-width: 412px) {
+  .logForm input {
+    width: 300px;
+  }
+}

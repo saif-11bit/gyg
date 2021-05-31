@@ -1,0 +1,230 @@
+{% extends 'base.html' %} {% load static %}
+<!-- css -->
+{% block css %}
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+/>
+<style>
+  .overlay {
+    height: 100%;
+    width: 100%;
+    /* display: none; */
+    color: white;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(0, 0, 0);
+    /* background-color: rgba(0, 0, 0, 0.9); */
+    overflow-y: scroll;
+  }
+  @media (min-width: 650px) {
+    .overlay-content {
+      position: relative;
+      top: 5%;
+      width: 50%;
+      left: 25%;
+    }
+  }
+
+  .overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+
+  .overlay a:hover,
+  .overlay a:focus {
+    color: #f1f1f1;
+  }
+  .topic-videos {
+    display: flex;
+    /*align-items: center;*/
+  }
+  .video-icon {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .video-title {
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  /* div.scroll {
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+  } */
+</style>
+<!--  -->
+{% endblock %}
+<!-- content -->
+{% block main %}
+<!--  -->
+<div class="hide-on-small-only">
+  <div id="id" class="overlay">
+    <div class="overlay-content">
+      <script src="https://growyourgrades.cdn.spotlightr.com/assets/vooplayer.js"></script>
+      <iframe
+        allow="autoplay"
+        class="video-player-container vooplayer"
+        data-playerId="{{play_video.content}}"
+        allowtransparency="true"
+        style="max-width: 100%"
+        name="vooplayerframe"
+        allowfullscreen="true"
+        src="https://growyourgrades.cdn.spotlightr.com/publish/{{play_video.content}}"
+        frameborder="0"
+        scrolling="no"
+      >
+      </iframe>
+      <!--  -->
+      <ul class="tabs black">
+        <li class="tab col s3">
+          <a class="active" href="#large-video">VIDEO</a>
+        </li>
+        <li class="tab col s3"><a href="#large-files">FILES</a></li>
+        <li class="tab col s3"><a href="#large-live">LIVE</a></li>
+      </ul>
+      <!--  -->
+      <!-- videos -->
+      <div id="large-video" class="col s12">
+        {% for topic in topics %}
+        <!--  -->
+        {% if topic.videos.all.count > 0 %}
+        <div style="display: flex; justify-content: center; font-size: 1.2rem">
+          {{topic.title}}
+        </div>
+        {% for video in topic.videos.all %}
+        <div id="{{video.id}}" class="topic-videos">
+          <div class="video-icon">
+            <i class="small material-icons">play_circle_outline</i>
+          </div>
+          <a href="{% url 'gyg:play_video' course_id video.id %}">
+            <div class="video-title">{{video.title}}</div>
+          </a>
+        </div>
+
+        {% endfor %}
+        <!--  -->
+        {% endif %}
+        <!--  -->
+        {% endfor %}
+      </div>
+      <div id="large-files" class="col s12 scroll">
+        {% for topic in topics %}
+        <!--  -->
+        {% if topic.files.all.count > 0 %}
+        <div style="display: flex; justify-content: center; font-size: 1.2rem">
+          {{topic.title}}
+        </div>
+        {% for file in topic.files.all %}
+        <div class="topic-videos">
+          <div class="video-icon">
+            <i class="small material-icons">insert_drive_file</i>
+          </div>
+          <a href="{{file.files.url}}">
+            <div class="video-title">{{file.title}}</div>
+          </a>
+        </div>
+        {% endfor %}
+        <!--  -->
+        {% endif %}
+        <!--  -->
+        {% endfor %}
+      </div>
+      <div id="large-live" class="col s12">Live Classes</div>
+      <!--  -->
+    </div>
+  </div>
+</div>
+<!--  -->
+<!--  -->
+<!--  -->
+<div class="hide-on-med-and-up">
+  <div>
+    <div id="playing-video">
+      <script src="https://growyourgrades.cdn.spotlightr.com/assets/vooplayer.js"></script>
+      <iframe
+        allow="autoplay"
+        class="video-player-container vooplayer"
+        data-playerId="{{play_video.content}}"
+        allowtransparency="true"
+        style="max-width: 100%"
+        name="vooplayerframe"
+        allowfullscreen="true"
+        src="https://growyourgrades.cdn.spotlightr.com/publish/{{play_video.content}}"
+        frameborder="0"
+        scrolling="no"
+      >
+      </iframe>
+    </div>
+
+    <ul class="tabs black">
+      <li class="tab col s3">
+        <a class="active" href="#video">VIDEO</a>
+      </li>
+      <li class="tab col s3"><a href="#files">FILES</a></li>
+      <li class="tab col s3"><a href="#live">LIVE</a></li>
+    </ul>
+    <!-- </div> -->
+    <!-- videos -->
+    <div id="video" class="col s12">
+      {% for topic in topics %}
+      <!--  -->
+      {% if topic.videos.all.count > 0 %}
+      <div style="display: flex; justify-content: center; font-size: 1.2rem">
+        {{topic.title}}
+      </div>
+      {% for video in topic.videos.all %}
+      <div id="{{video.id}}" class="topic-videos">
+        <div class="video-icon">
+          <i class="small material-icons">play_circle_outline</i>
+        </div>
+        <a href="{% url 'gyg:play_video' course_id video.id %}">
+          <div class="video-title">{{video.title}}</div>
+        </a>
+      </div>
+
+      {% endfor %}
+      <!--  -->
+      {% endif %}
+      <!--  -->
+      {% endfor %}
+    </div>
+    <div id="files" class="col s12 scroll">
+      {% for topic in topics %}
+      <!--  -->
+      {% if topic.files.all.count > 0 %}
+      <div style="display: flex; justify-content: center; font-size: 1.2rem">
+        {{topic.title}}
+      </div>
+      {% for file in topic.files.all %}
+      <div class="topic-videos">
+        <div class="video-icon">
+          <a href="{{file.files.url}}">
+            <i class="small material-icons">insert_drive_file</i>
+          </a>
+        </div>
+        <a href="{{file.files.url}}">
+          <div class="video-title">{{file.title}}</div>
+        </a>
+      </div>
+      {% endfor %}
+      <!--  -->
+      {% endif %}
+      <!--  -->
+      {% endfor %}
+    </div>
+    <div id="live" class="col s12">Live Classes</div>
+    <!-- </div> -->
+    <!--  -->
+  </div>
+</div>
+<!--  -->
+{% endblock %}

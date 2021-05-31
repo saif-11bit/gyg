@@ -1,0 +1,47 @@
+{% extends "account/base.html" %} {% load i18n %}{% load static %} {% load
+account socialaccount %}
+<!-- css -->
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}" />
+{% endblock %}
+<!-- content  -->
+{% block main %}
+<div class="main-login">
+  <div class="google-login">
+    <div class="text">Login with</div>
+
+    <div>
+      <a href=""
+        ><img src="./googleLogo.png" width="120px" height="40px" alt=""
+      /></a>
+    </div>
+  </div>
+  <div class="or">OR</div>
+  <div class="login-form">
+    <form class="logForm" method="POST" action="{% url 'account_signup' %}">
+      {% csrf_token %}
+      <input type="text" name="first_name" placeholder="First Name" required />
+      <input type="text" name="last_name" placeholder="Last Name" required />
+      <input type="email" name="email" placeholder="Email" required />
+      <input type="password" name="password1" placeholder="Password" required />
+      <input
+        type="password"
+        name="password2"
+        placeholder="Password(Again)"
+        required
+      />
+      {% if redirect_field_value %}
+      <input
+        type="hidden"
+        name="{{ redirect_field_name }}"
+        value="{{ redirect_field_value }}"
+      />
+      {% endif %}
+      <input type="submit" value="Register" />
+    </form>
+  </div>
+  <div class="anotherPageLk">
+    Already have an account: <a href="/accounts/login/">SignIn</a>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,2 @@
+test key id =  rzp_test_eCJ9lwppcNQcgV
+test key secret = RPs0WZfsGV5uhsxsIv9ItVuR

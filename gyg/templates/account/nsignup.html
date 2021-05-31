@@ -1,0 +1,53 @@
+{% extends "account/base.html" %} {% load i18n %}{% load static %}
+{% load account socialaccount %}
+<!-- css -->
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/signup.css' %}" />
+{% endblock %}
+<!-- content  -->
+{% block content %}
+<div class="signup-panel">
+  <div class="join">Join Us</div>
+  <div class="card-panel">
+    <!-- <h1>{% trans "Sign Up" %}</h1> -->
+    <!-- signup -->
+    {% get_providers as socialaccount_providers %}
+
+    {% if socialaccount_providers %}
+      <div class="social-login card-panel">
+      <div>
+        <img src="{% static 'img/search.png' %}" alt="">
+      </div>
+      <div>
+        <strong>LogIn with <span class="google">{% include "socialaccount/snippets/provider_list.html" with process="login" %}</strong></span>
+      </div>
+      </div>
+
+      <div class="login-or" style="text-align: center">{% trans 'or' %}</div>
+
+
+
+
+    {% endif %}
+    <form
+      class="signup"
+      id="signup_form"
+      method="post"
+      action="{% url 'account_signup' %}"
+    >
+      {% csrf_token %} {{ form.as_p }} {% if redirect_field_value %}
+      <input
+        type="hidden"
+        name="{{ redirect_field_name }}"
+        value="{{ redirect_field_value }}"
+      />
+      {% endif %}
+      <button type="submit">{% trans "Sign Up" %} &raquo;</button>
+    </form>
+    <p>
+      {% blocktrans %}Already have an account? Then please
+      <a href="{{ login_url }}">SignIn</a>.{% endblocktrans %}
+    </p>
+  </div>
+</div>
+{% endblock %}

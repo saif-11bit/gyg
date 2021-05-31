@@ -1,0 +1,43 @@
+{% extends "account/base.html" %} {% load static %} {% load i18n %} {% load
+account socialaccount %} {% block css %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}" />
+{% endblock %} {% block main %}
+<!-- ===================================== -->
+
+<div class="main-login">
+  <div class="google-login">
+    <div class="text">Login with</div>
+
+    <div>
+      <a href=""
+        ><img src="./googleLogo.png" width="120px" height="40px" alt=""
+      /></a>
+    </div>
+  </div>
+  <div class="or">OR</div>
+  <div class="login-form">
+    <form class="logForm" method="POST" action="{% url 'account_login' %}">
+      {% csrf_token %}
+      <input type="email" placeholder="Email" name="login" />
+      <input type="password" placeholder="Password" name="password" />
+      <!--  -->
+      {% if redirect_field_value %}
+      <!--  -->
+      <input
+        type="hidden"
+        name="{{ redirect_field_name }}"
+        value="{{ redirect_field_value }}"
+      />
+      <!--  -->
+      {% endif %}
+      <!--  -->
+      <input type="submit" value="Login" />
+    </form>
+  </div>
+  <div class="anotherPageLk">
+    Create an account: <a href="/accounts/signup/">Sign Up</a>
+  </div>
+</div>
+
+<!-- ====================================== -->
+{% endblock %}

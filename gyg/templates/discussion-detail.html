@@ -1,0 +1,100 @@
+{% extends 'base.html' %} {% load static %}
+<!-- css -->
+{% block css %}
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+/>
+<link rel="stylesheet" href="{% static 'css/discussion.css' %}" />
+{% endblock %}
+<!-- content -->
+{% block main %}
+
+<!-- answer -->
+<div id="answer-modal" class="modal">
+  <div class="modal-content">
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <!-- <textarea
+        class="materialize-textarea"
+        name="answer"
+        cols="30"
+        rows="10"
+      ></textarea> -->
+      {{form.answer}}
+      <label for="answer">Answer</label>
+      <div class="file-field input-field">
+        <div class="btn">
+          <span>Image</span>
+          <!-- <input name="quesImg" type="file" /> -->
+          {{form.answer_img}}
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text" />
+        </div>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+<!--  -->
+<div class="discuss">
+  <div class="discussion-detail">
+    <div class="question">
+      <div class="">
+        Asked By:
+        <span style="color: rgb(8, 85, 104); font-size: 1.2em"
+          >@{{question.asked_by.first_name}}
+          {{question.asked_by.last_name}}</span
+        >
+      </div>
+    </div>
+    <div class="question-detail">
+      {% if question.ques_img %}
+      <img
+        class="materialboxed"
+        src="{{question.ques_img.url}}"
+        width="100%"
+        alt=""
+      />
+      {% endif %} {{question.question}}
+    </div>
+  </div>
+  <div class="answer-detail">
+    <div class="answer">
+      Answers:
+      <div class="add-ans">
+        <a class="btn modal-trigger" href="#answer-modal">
+          <i class="material-icons">add</i>
+          Add Answer
+        </a>
+      </div>
+    </div>
+    <div class="answers">
+      {% for answer in question.answers.all %} {% if answer.answer_img %}
+      <img
+        class="materialboxed"
+        src="{{answer.answer_img.url}}"
+        width="100%"
+        alt=""
+      />
+      {% endif %}
+      <div class="new-answer">
+        {% if answer.answer_by.is_teacher == True%}
+        <!--  -->
+        Ans_by:@<span
+          >{{answer.answer_by}}<i class="tiny material-icons blue-text"
+            >check_circle</i
+          ></span
+        >> {{answer.answer}}
+        <!--  -->
+        {% else %}
+        <!--  -->
+        Ans_by:@{{answer.answer_by.first_name}}> {{answer.answer}} {% endif %}
+      </div>
+
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

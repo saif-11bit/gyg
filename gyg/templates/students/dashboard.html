@@ -1,0 +1,141 @@
+{% extends 'base.html' %} {% load static %}
+<!-- dashboard css -->
+{% block css %}
+<!--  -->
+<link rel="stylesheet" href="{% static 'css/studentDashboard.css' %}" />
+<!--  -->
+{% endblock %}
+
+<!-- dashboard content -->
+{% block main %}
+<!--  -->
+<div class="student-intro">
+  <div class="img">
+    <img
+      src="{% static 'img/student_dashboard.png'%}"
+      alt="Image"
+      width="100%"
+    />
+  </div>
+</div>
+<!-- my courses -->
+<div class="student-myCourses">
+  <div class="myCourses-title">My Courses</div>
+  {% if my_courses %}
+  <div class="course-cat-cards">
+    {% for course in my_courses %}
+    <a href="{% url 'gyg:user-course-detail' course.id %}">
+      <div class="customCard">
+        <div class="customCard-image">
+          <img src="{{course.course_thumbnail.url}}" alt="" />
+        </div>
+        <div class="customCard-title">{{course.title}}</div>
+        <div class="card-tutorName">By Saif Ahmed</div>
+        <div class="card-priceDetail">
+          <div class="price">₹{{course.price}}</div>
+          <div class="priceTag">Paid</div>
+        </div>
+        <div class="card-ratings">
+          <div class="rating">★★★★★</div>
+          <div class="people-rated">(10)</div>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty_my_courses">No courses Available in My Courses</div>
+  {% endif %}
+</div>
+
+<!-- available courses -->
+<div id="mainCourses_id" class="main-courses">
+  {% for category in categories %}
+  <div class="course-cat-title">{{category}}</div>
+
+  <div class="course-cat-cards">
+    {% for i in category.courses.all %}
+    <a href="{% url 'gyg:courseDesc' i.id %}">
+      <div class="customCard">
+        <div class="customCard-image">
+          <img src="{{i.course_thumbnail.url}}" alt="" />
+        </div>
+        <div class="customCard-title">{{i.title}}</div>
+        <div class="card-tutorName">By Saif Ahmed</div>
+        <div class="card-priceDetail">
+          <div class="price">₹{{i.price}}</div>
+          <div class="priceTag">Paid</div>
+        </div>
+        <div class="card-ratings">
+          <div class="rating">★★★★★</div>
+          <div class="people-rated">(10)</div>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% endfor %}
+</div>
+
+<!-- live classes -->
+<div class="student-myCourses">
+  <div class="myCourses-title">Live Classes</div>
+  {% if live %}
+  <div class="course-cat-cards">
+    {% for i in live %}
+    <a href="{{i.link}}">
+      <div class="customCard">
+        <div class="customCard-image">
+          <img src="{{i.thumbnail.url}}" alt="" />
+        </div>
+        <div class="customCard-title">{{i.title}}</div>
+        <div class="card-tutorName">By Saif Ahmed</div>
+        <div class="card-priceDetail">
+          <div class="price">₹100</div>
+          <div class="priceTag">Paid</div>
+        </div>
+        <div class="card-ratings">
+          <div class="rating">★★★★★</div>
+          <div class="people-rated">(10)</div>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty_my_courses">No Live Class Today</div>
+  {% endif %}
+</div>
+<!--  -->
+
+<!-- footer -->
+<div class="mobileFooter">
+  <div class="mobileFooterLink">
+    <a href="#">
+      <i class="small material-icons">home</i>
+      Home</a
+    >
+  </div>
+  <div class="mobileFooterLink">
+    <a href="">
+      <i class="small material-icons">live_tv</i>
+      Live</a
+    >
+  </div>
+  <div class="mobileFooterLink">
+    <a href="">
+      <i class="small material-icons">play_circle_filled</i>
+      My Courses</a
+    >
+  </div>
+  <div class="mobileFooterLink">
+    <a href="">
+      <i class="small material-icons">home</i>
+      Home</a
+    >
+  </div>
+</div>
+{% endblock %}
+
+<!-- dashboard content -->
+{% block js %} {% endblock %}

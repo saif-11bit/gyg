@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Poppins"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <title>GYG</title>
+    <link rel="stylesheet" href="{% static 'css/style.css'%}" />
+    {% block css %}{% endblock%}
+  </head>
+  <body>
+    <div class="nav">
+      <div class="logo">
+        <div class="img">
+          <img src="{% static 'img/logo.png'%}" alt="" />
+        </div>
+        <div class="text"><a href="/">Grow Your Grades</a></div>
+      </div>
+      <div class="nav-links">
+        <li><a class="link1" href="#mainCourses_id">Courses</a></li>
+        {% if not request.user.is_authenticated %}
+        <li><a class="link2" href="/accounts/login/">Login</a></li>
+        {% else %}
+        <li><a class="link2" href="/accounts/logout/">Logout</a></li>
+        {% endif %}
+        <!-- <li><a class="link3" href="#">Offline Class</a></li> -->
+      </div>
+    </div>
+    <main>{% block main %}{% endblock %}</main>
+    <footer>
+      <div class="footer">
+        <div class="Fcomapany">
+          <div class="footerTitle">Grow Your Grades</div>
+          <div class="social-links">
+            <div class="foot-link">
+              <a href="">
+                <div class="social-icon">
+                  <img src="{% static 'img/sicons/youtube.png'%}" alt="" />
+                </div>
+                <div class="social-pf">Youtube</div>
+              </a>
+            </div>
+            <div class="foot-link">
+              <a href="">
+                <div class="social-icon">
+                  <img src="{% static 'img/sicons/instagram.png'%}" alt="" />
+                </div>
+                <div class="social-pf">Instagram</div>
+              </a>
+            </div>
+            <div class="foot-link">
+              <a href="">
+                <div class="social-icon">
+                  <img src="{% static 'img/sicons/gmail.png'%}" alt="" />
+                </div>
+                <div class="social-pf">Gmail</div>
+              </a>
+            </div>
+            <div class="foot-link">
+              <a href="#">
+                <div class="social-icon">
+                  <img src="{% static 'img/sicons/twitter.png'%}" alt="" />
+                </div>
+                <div class="social-pf">Twitter</div>
+              </a>
+            </div>
+            <div class="foot-link">
+              <a href="">
+                <div class="social-icon">
+                  <img src="{% static 'img/sicons/pinterest.png'%}" alt="" />
+                </div>
+                <div class="social-pf">Pinterest</div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="about">
+          <div class="footerTitle">About</div>
+          <div class="footerAboutD">
+            An e-learning platform started by a team of passionate learners with
+            an aim to develop an environment where everyone has "FREEDOM TO
+            EVOLVE". We provide 1-1 interactive doubt sessions. Our vision is to
+            build a RESULT-ORIENTED youth. Join Us Now and be a part of an
+            innovative pedagogy.
+          </div>
+        </div>
+
+        <div class="office-info">
+          <div class="footerTitle">Contact Us</div>
+          <div class="connectFoot">
+            <div class="connectFoot-icon">
+              <img src="{% static 'img/sicons/call.png'%}" alt="" />
+            </div>
+            <div class="connectFoot-text">9155126422</div>
+          </div>
+          <div class="connectFoot">
+            <div class="connectFoot-icon">
+              <img src="{% static 'img/sicons/building.png'%}" alt="" />
+            </div>
+            <div class="connectFoot-text">
+              Bachpan Play School,Choti Badalpura,Khagaul,Patna-801105
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- javascripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <script>
+      M.AutoInit();
+    </script>
+    {% block js %}{% endblock%}
+  </body>
+</html>

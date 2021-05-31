@@ -1,0 +1,14 @@
+.myCourses-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 20px;
+}
+
+.empty_my_courses {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  color: rgb(88, 88, 88);
+  font-size: 1.3rem;
+}

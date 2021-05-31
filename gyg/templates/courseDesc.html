@@ -1,0 +1,104 @@
+{% extends 'base.html' %} {% load static %}
+<!-- CourseDesc css -->
+{% block css %}
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+/>
+<link rel="stylesheet" href="{% static 'css/courseDesc.css' %}" />
+{% endblock %}
+
+<!-- CourseDesc content -->
+{% block main %}
+<div class="main-courceDesc">
+  <div class="courceDesc-space"></div>
+  <div class="courseDesc-content">
+    <div class="courseDescTitle">{{course.title}}</div>
+    <div class="courseDescTutor">
+      By {{course.tutor.first_name}} {{course.tutor.last_name}}
+    </div>
+    <div class="courseDescRatings">
+      <div class="courseDescRatings-rating">★★★★★</div>
+      <div class="courseDescRatings-people-rated">(10)</div>
+    </div>
+    <div class="courseDescPrice">₹ {{course.price}}</div>
+    <div class="courseDescDescription">{{course.brief_desc}}</div>
+    <div>
+      <script src="https://growyourgrades.cdn.spotlightr.com/assets/vooplayer.js"></script>
+      <iframe
+        allow="autoplay"
+        class="video-player-container vooplayer"
+        data-playerId="{{course.videos.first.content}}"
+        allowtransparency="true"
+        style="max-width: 100%"
+        name="vooplayerframe"
+        allowfullscreen="true"
+        src="https://growyourgrades.cdn.spotlightr.com/publish/{{course.videos.first.content}}"
+        frameborder="0"
+        scrolling="no"
+      >
+      </iframe>
+    </div>
+    {% if course in user_course.courses.all %}
+    <div class="courseDescPurchase">
+      <!-- <input type="submit" value="Purchase Now" /> -->
+      <a href="{% url 'gyg:user-course-detail' course.id %}">Start Now</a>
+    </div>
+    {%else%}
+    <div class="courseDescPurchase">
+      <!-- <input type="submit" value="Purchase Now" /> -->
+      <a href="{% url 'gyg:order-summary' course.id %}">Purchase Now</a>
+    </div>
+    {% endif %}
+    <div class="courseDescIncludes">
+      <div class="courseDescIncludes-heading">Course Includes:</div>
+      {% for i in course_includes %}
+      <div class="courseDescIncludes-content">
+        <div class="courseDescIncludes-icon">
+          <i class="tiny material-icons">control_point</i>
+        </div>
+        <div class="courseDescIncludes-text">{{i}}</div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="courseDescContent-videos">
+      <!--  -->
+      <div class="courseDescVid-heading">Course Content:</div>
+      <ul class="collapsible">
+        {% for topics in course.topics.all %}
+        <li class="active">
+          <div class="collapsible-header">
+            <i class="material-icons">ondemand_video</i>{{topics.title}}
+          </div>
+          <div class="collapsible-body">
+            {% for i in topics.videos.all %}
+            <div class="topicContent">
+              <div class="icon">
+                <i class="material-icons">play_circle_outline</i>
+              </div>
+              <div class="topicContentTitle">{{i.title}}</div>
+            </div>
+            {% endfor %}
+            <!--  -->
+            {% for i in topics.files.all %}
+            <div class="topicContent">
+              <div class="icon">
+                <i class="material-icons">insert_drive_file</i>
+              </div>
+              <div class="topicContentTitle">{{i.title}}</div>
+            </div>
+            {% endfor %}
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+      <!--  -->
+    </div>
+  </div>
+  <div class="courceDesc-space"></div>
+</div>
+<!--  -->
+{% endblock %}
+
+<!-- CourseDesc js -->
+{% block js %} {% endblock %}

@@ -1,0 +1,46 @@
+{% extends "account/base.html" %}
+{% load static %}
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/signin.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div class="signin-panel">
+<div class="join">LogIn Now</div>
+  <div class="card-panel">
+
+
+    {% get_providers as socialaccount_providers %}
+
+    {% if socialaccount_providers %}
+      <div class="social-login card-panel">
+      <div>
+        <img src="{% static 'img/search.png' %}" alt="">
+      </div>
+      <div>
+        <strong>LogIn with <span class="google">{% include "socialaccount/snippets/provider_list.html" with process="login" %}</strong></span>
+      </div>
+      </div>
+
+      <div class="login-or" style="text-align: center">{% trans 'or' %}</div>
+
+
+
+
+    {% endif %}
+
+    <form class="login" method="POST" action="{% url 'account_login' %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% endif %}
+      <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+      <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

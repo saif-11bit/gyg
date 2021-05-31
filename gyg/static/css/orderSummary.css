@@ -1,0 +1,67 @@
+.pdesc,
+.pprice,
+.ppayType {
+  display: flex;
+}
+
+.pdesc .pdescTitle,
+.pprice .ppriceTitle,
+.ppayType .ppayTypeTitle {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.pdesc .pdescContent,
+.pprice .ppriceContent,
+.ppayType .ppayTypeContent {
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+.collapsible-header {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+/* .pdesc,
+.ptitle {
+  font-size: 1.3rem;
+}
+.pprice {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+.ppayType {
+  font-size: 1.2rem;
+} */
+.finalPayBtn {
+  width: 100%;
+  height: 40px;
+  border: none;
+  background-color: #1b3288;
+  color: white;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+#CouponForm input[type="text"] {
+  background-color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 3px;
+  height: 45px;
+  margin-bottom: 20px;
+}
+
+#CouponForm input[type="submit"] {
+  background-color: #b125b1;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  height: 40px;
+  color: white;
+}
+.orderSummary {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
